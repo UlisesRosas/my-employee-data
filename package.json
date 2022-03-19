@@ -1,0 +1,25 @@
+{
+  "name": "my-employee-data",
+  "version": "1.0.0",
+  "description": "Application to track employee information",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UlisesRosas/my-employee-data.git"
+  },
+  "author": "Ulises Rosas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UlisesRosas/my-employee-data/issues"
+  },
+  "homepage": "https://github.com/UlisesRosas/my-employee-data#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.1",
+    "mysql2": "^2.3.3"
+  }
+}
