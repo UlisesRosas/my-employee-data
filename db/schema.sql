@@ -1,7 +1,8 @@
 -- deletes the company database if it already exists to prevent duplicates
 DROP DATABASE IF EXISTS company;
 DROP DATABASE IF EXISTS role;
-DROP DATABASE IF EXISTS employee;
+DROP DATABASE IF EXISTS employe
+e;
 
 -- creates the data base named company that will have multiple tables
 CREATE DATABASE company;   

@@ -1,11 +1,14 @@
 const connection = require('./connection')
+
 // build class with methods and 1 query per method
-class DB { 
-    constructor(connection){
-        this.connection = connection
+class DB {
+    constructor(connection) {
+        // connects the database
+        this.connection = connection;
     }
-// view all departments
-    viewAllDepartments(){
+    // methods
+    // view all departments
+    viewAllDepartments() {
         return this.connection.promise().query(
             `   SELECT
                     department.id,
@@ -16,10 +19,10 @@ class DB {
         )
     }
 
-// view all roles
-    viewAllRoles(){
+    // view all roles
+    viewAllRoles() {
         return this.connection.promise().query(
-          ` 
+            ` 
           SELECT
                 role.id,
                 role.title,
@@ -29,36 +32,79 @@ class DB {
                 role
             LEFT JOIN
                 department ON role.department_id = department.id
-          `  
+          `
         )
     }
 
-// view all employees 
+    // view all employees 
+    viewALLEmployees() {
+        return this.connection.promise().query(
+            `
+            SELECT 
+                employee.first_name,
+                employee.last_name,
+                role.title,
+                role.department_id,
+                role.salary,
+                employee.manager_id
+            FROM 
+                employee
+            LEFT JOIN 
+                role ON employee.role_id = role.id
+            `
+        )
+    }
 
-// add a department
-addDepartment(department){
-    return this.connection.promise().query(
-        `
+    // add a department
+    addDepartment(department) {
+        return this.connection.promise().query(
+            `
         INSERT INTO
             department
         SET
             ?
         `, department
-    )
+        )
+    }
+
+    // add role
+    addRole(role) {
+        // returns the query in promise form
+        return this.connection.promise().query(
+            // the SET method adds all the values for this role without specifying
+            `
+        INSERT INTO 
+            role 
+        SET 
+            ?
+            `, role
+        )
+    }
+
+    // add employee
+    addEmployee(employee) {
+        return this.connection.promise().query(
+             // the SET method adds all the values for this role without specifying
+            `
+        INSERT INTO
+            employee
+        SET
+            ?
+            `, employee
+        )
+    }
+
+    // update employee role 
+    updateEmployeeRole(employee) {
+        return this.connection.promise().query(
+            // make a mysql query to update the role_id
+            
+        )
+    }
+
+
+
 }
-
-// add role
-
-// add employee
-
-// update employee role 
-
-
-
-
-
-}
-
-// 
+ 
 
 module.exports = new DB(connection);
