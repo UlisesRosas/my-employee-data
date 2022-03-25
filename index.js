@@ -16,7 +16,8 @@ async function mainMenu(){
                 'view all employees',
                 'add department',
                 'add role',
-                'add employee'
+                'add employee',
+                'update role_id'
             ]
         }
     ])
@@ -34,6 +35,8 @@ async function mainMenu(){
             return addRole();
         case 'add employee': 
             return addEmployee();
+        case 'update role_id':
+            return updateEmployeeRole();
     }
 }
 
@@ -67,13 +70,15 @@ async function addDepartment(){
             message: 'What is the name of the new department?'
         }
     ])
+    // passing in the department data to the method in the DB class
     await db.addDepartment(department);
     return mainMenu();
 }
 
-// function to get input for 
+// function to gadd new role
 async function addRole() {
-    const [role] = await inquirer.prompt([
+    // it breaks if destructured so no square brakets
+    const role = await inquirer.prompt([
         // grabs data for name of the role
         {
             type: 'input',
@@ -89,6 +94,8 @@ async function addRole() {
             message: 'Wha is the salary for this role'
         },
         // grabs data for the roles department
+        // if this fails its because the department id has to be created first
+        // in department table
         {
             type:'input',
             // role table field you are geting values for 
@@ -97,6 +104,7 @@ async function addRole() {
 
         }
     ])
+    // passing in the role data to the method in the DB class
     await db.addRole(role);
     return mainMenu();
 }
@@ -128,7 +136,25 @@ async function addEmployee() {
         }
 
     ])
+    // passing in the employee data to the method in the DB class
     await db.addEmployee(employee);
     return mainMenu();
+}
+
+// function to update employee role
+async function updateEmployeeRole() {
+    const [employee] = await inquirer.prompt([
+        
+        {
+            type: 'input',
+            name: 'role_id',
+            message:'What is the role ID for the new role?'
+        }
+        
+    ])
+       
+    // passing in the employee data to the method in the DB class 
+    await db.updateEmployeeRole(employee);
+    return mainMenu;
 }
 mainMenu();

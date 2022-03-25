@@ -3,7 +3,7 @@ const connection = require('./connection')
 // build class with methods and 1 query per method
 class DB {
     constructor(connection) {
-        // connects the database
+        // connects the database to the class
         this.connection = connection;
     }
     // methods
@@ -41,6 +41,7 @@ class DB {
         return this.connection.promise().query(
             `
             SELECT 
+                employee.id,
                 employee.first_name,
                 employee.last_name,
                 role.title,
@@ -97,8 +98,15 @@ class DB {
     // update employee role 
     updateEmployeeRole(employee) {
         return this.connection.promise().query(
-            // make a mysql query to update the role_id
-            
+            // mysql query that updates the role_id with prepared statements '?'
+            `
+        UPDATE 
+            employee
+        SET
+            role_id = ?
+        WHERE
+            id = ?
+            `, employee
         )
     }
 
