@@ -70,6 +70,7 @@ async function addDepartment(){
             message: 'What is the name of the new department?'
         }
     ])
+    console.log(`Added ${department.name} to the data base`)
     // passing in the department data to the method in the DB class
     await db.addDepartment(department);
     return mainMenu();
@@ -104,6 +105,8 @@ async function addRole() {
 
         }
     ])
+    
+    console.log(`Added ${role.title} to the data base`)
     // passing in the role data to the method in the DB class
     await db.addRole(role);
     return mainMenu();
@@ -136,6 +139,7 @@ async function addEmployee() {
         }
 
     ])
+    console.log(`Added ${role.first_name} to the data base`)
     // passing in the employee data to the method in the DB class
     await db.addEmployee(employee);
     return mainMenu();
