@@ -139,7 +139,7 @@ async function addEmployee() {
         }
 
     ])
-    console.log(`Added ${role.first_name} to the data base`)
+    console.log(`Added ${employee.first_name} to the data base`)
     // passing in the employee data to the method in the DB class
     await db.addEmployee(employee);
     return mainMenu();
